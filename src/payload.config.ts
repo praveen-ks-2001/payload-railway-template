@@ -12,7 +12,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000', 
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
   admin: {
     user: Users.slug,
     importMap: {
@@ -27,11 +27,11 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-    connectionString: process.env.DATABASE_URL || '',
-    ssl: process.env.DATABASE_SSL === 'true'
-      ? { rejectUnauthorized: false }
-      : false,
-  },
+      connectionString: process.env.DATABASE_URI || '',
+      ssl: process.env.DATABASE_SSL === 'true'
+        ? { rejectUnauthorized: false }
+        : false,
+    },
   }),
   sharp,
   plugins: [],
