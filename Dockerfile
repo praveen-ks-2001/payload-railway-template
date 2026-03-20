@@ -40,7 +40,9 @@ COPY --from=builder /app/tsconfig.json ./tsconfig.json
 COPY --from=builder /app/src ./src
 COPY --from=builder /app/next.config.ts ./next.config.ts
 
+RUN mkdir -p public src/migrations
+
 EXPOSE 3000
 ENV PORT 3000
 
-CMD ["npm", "start"]
+CMD ["sh", "-c", "node_modules/.bin/payload migrate && node_modules/.bin/next start 2>&1; echo \"exit: $?\""]
