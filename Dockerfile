@@ -17,6 +17,8 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
+# Install sharp for Linux musl (Alpine) explicitly
+RUN npm install --os=linux --libc=musl --cpu=x64 sharp
 
 
 # Rebuild the source code only when needed
