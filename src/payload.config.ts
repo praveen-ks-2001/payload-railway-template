@@ -7,6 +7,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import * as migrations from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,6 +33,7 @@ export default buildConfig({
         ? { rejectUnauthorized: false }
         : false,
     },
+    prodMigrations: migrations,
   }),
   sharp,
   plugins: [],
